@@ -1,0 +1,24 @@
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# 开发残留（优化过程的备份与诊断，不随技能发布）
+*.bak
+*.bak[0-9]
+*.baseline
+diagnostics.tsv
+distill_report.json
+hardening_report.json
+
+# 运行产物
+/tmp/
+*.tmp

@@ -1,0 +1,10 @@
+timestamp	commit	skill	round	old_score	new_score	status	dim_changed	delta	note	eval_mode	judge_count
+2026-09-28T19:00:00+08:00	-	superforecasting	0	-	77.0	baseline	-	-	Quick模式（dim8 升为独立子agent实测，3用例）	full_test	1
+2026-09-28T19:12:00+08:00	-	superforecasting	1	77.0	83.0	keep	dim4	+6.0	SKILL.md 补 5 个硬停点（含 STOP 关键字）+ 三处口径对齐（红线 11 条 / 自检 10 项 / v1.2）	full_test	1
+2026-09-28T19:20:00+08:00	-	superforecasting	2	83.0	87.0	keep	dim5	+4.0	修 B 组 4 处规则冲突：04 红线#4 改双口径 / 06 U5 补小概率倍数分支 / 06 结构变化门槛统一 / 01 出口D vs 里程碑优先级 / 02 互校时序不可能（移交接 Step 4）	full_test	1
+2026-09-28T19:30:00+08:00	-	superforecasting	3	87.0	90.0	keep	dim5	+3.0	修 C 组 3 处缺口：04 新增「敏感区间怎么算」/ SKILL 新增场景归类判据表 / 05 新增三档输出（完整/简报/快答）	full_test	1
+2026-09-28T19:45:00+08:00	-	superforecasting	4	90.0	93.6	keep	dim1	+3.6	修复评 3 个🔴：ledger 模板 final_probability 对齐 0.55 + 新增字段一致性铁律 / 01 时间跨度三处强度对齐 + 补「切不出里程碑」落点 / SKILL 补 Step7-9 三条启动条件表 + automation 指路	full_test	1
+2026-09-28T20:15:00+08:00	-	superforecasting	5	93.6	95.5	keep	dim5	+1.9	收 🟡：03 新增 RCF 降级路径（D0/D1/D2 三档）+ 跨技能落点正式化（独立文件命名 / 写入方式 / 冲突不覆盖）；SKILL 入口补降级指路；90 新增冗余核查小节（Distill+SkillOps 实测 0 P0 / 7-7 核心资产 / 0 断链，确认 dim7b 为误报）；顺带修 SKILL 短式引用 references/03 导致的 missing 告警	full_test	1
+2026-09-28T20:30:00+08:00	-	superforecasting	6	95.5	96.0	keep	dim1	+0.5	复评后补修：01 出口C/D入档留痕 + 单点型/数字型分支 / 模板补本步档位留痕 / SKILL 改必读+探测措辞 / 03 D2落点去子目录 / 90 冗余核查实测入档	full_test	1
+2026-09-28T20:45:00+08:00	-	superforecasting	7	96.0	96.5	keep	dim3	+0.5	二轮复评：01 新增判定顺序铁律（A先判滞后统计量→B再判里程碑，防两路径打架）/ 03 措辞对齐不可读 / 模板里程碑限累积型 / 05 _index补未入档判定节 / SKILL 入口预告例外	full_test	1
+2026-09-28T21:00:00+08:00	-	superforecasting	8	96.5	97.0	keep	dim6	+0.5	三轮复评：同步 N1 遗漏三处——test-prompts P3 期望改唯一路径（不切里程碑）+ traps 补伪里程碑 / 01 筛③表行与记忆点补例外 / SKILL 措辞回指	full_test	1

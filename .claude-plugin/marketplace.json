@@ -1,0 +1,24 @@
+{
+  "name": "forecasting-skills",
+  "owner": {
+    "name": "herong113",
+    "url": "https://github.com/herong113"
+  },
+  "metadata": {
+    "description": "Marketplace hosting two forecasting skills: superforecasting (turn fuzzy questions into testable probabilities and track them to settlement) and reference-class-forecasting (correct optimism bias with base rates from comparable finished cases)."
+  },
+  "plugins": [
+    {
+      "name": "forecasting-skills",
+      "description": "两个预测类 Agent Skill：① superforecasting 超预测——把模糊问题变成可检验的数字概率并长期跟踪校准（10 步流程 / 四出口准入 / 费米分解 / 外部视角 / C+ 锚定 / Brier 记分闭环）；② reference-class-forecasting 参考类预测——用同类已完结案例的统计分布修正内部估计的乐观偏差。",
+      "version": "1.0.0",
+      "author": {
+        "name": "herong113",
+        "url": "https://github.com/herong113"
+      },
+      "source": "./",
+      "category": "forecasting",
+      "homepage": "https://github.com/herong113/forecasting-skills"
+    }
+  ]
+}

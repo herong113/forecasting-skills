@@ -1,0 +1,5 @@
+timestamp	commit	skill	round	old_score	new_score	status	dim_changed	delta	note	eval_mode	judge_count
+2026-09-27T22:35	local	reference-class-forecasting	baseline	-	80.8	baseline	baseline	-	首次基线;dim4=0、dim3=6.5;dim8=8.5(独立子agent,full_test=减脂实战)	full_test	1
+2026-09-28T00:30	local	reference-class-forecasting	r1	80.8	86.8	committed	dim4	+6.0	插入3处STOP/CHECKPOINT(Step0出口/Step2后/交付前自检);正则命中3处;+159字符(3.7%)	dry_run	1
+2026-09-28T00:33	local	reference-class-forecasting	r2	86.8	88.6	committed	dim3	+1.8	跳题快速通道+跳流程两段式+交付文本兜底;独立子agent重评6.5→8.0;+197字符(4.4%)	dry_run	1
+2026-09-28T00:40	local	reference-class-forecasting	r3	88.6	89.2	committed	dim5	+0.6	HASP误报溯源:"建议句式"命中栏目名"上浮建议表",改名"上浮对照表";软化词清零;8.82→9.18	dry_run	1

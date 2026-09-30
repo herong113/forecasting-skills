@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>参考类预测报告 · {{项目名称}}</title>
+<!--
+  参考类预测报告模板(reference-class-forecasting)
+  用法:复制本文件 → 替换全部 {{...}} 占位符 → 按需要增删表格行 → present_files 交付。
+  填充规则:
+  1. 所有数字保留原始精度与口径;单位一律写入表头,不写进单元格。
+  2. 结论条二选一:verdict-fail(不支持,默认)或 verdict-pass(支持),删掉另一个类。
+  3. "数据来源与可信度表"为必填模块,不得整节删除;无可靠基线的维度在表中标注 D 级。
+  4. 个人决策场景必须在"方法与局限"中保留伦理提示行。
+  【深入浅出双语规则(v1.4)】
+  5. 专业术语保留,但每个专业词首次出现时,必须紧跟白话括号(≤20 字),如"基线中位(同类人里排中间那位)"。
+  6. 结论条必须配一行"翻译"(.verdict-plain):用大白话把裁决说一遍。
+  7. 每个表格的 note 用口语复述"这张表说明什么",以"这张表的意思:"或"简单说:"开头。
+  8. 白话只解释不扩写,不删术语、不替代数据、每处 ≤20 字,避免喧宾夺主。
+-->
+<style>
+  :root {
+    --bg: #faf7f0;
+    --card: #fffdf8;
+    --ink: #262019;
+    --ink-2: #6b5f4e;
+    --accent: #8f7650;
+    --line: #e0d8c8;
+    --thead: #f0e9da;
+    --fail: #9c4a2f;
+    --pass: #5a7247;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Noto Serif SC", "Songti SC", "SimSun", serif;
+    line-height: 1.7;
+    padding: 40px 16px 64px;
+  }
+  .page { max-width: 880px; margin: 0 auto; }
+  header { border-bottom: 2px solid var(--accent); padding-bottom: 18px; margin-bottom: 24px; }
+  .kicker {
+    font-size: 12px; letter-spacing: 3px; color: var(--accent);
+    font-family: "Source Code Pro", Consolas, monospace; margin-bottom: 10px;
+  }
+  h1 { font-size: 26px; font-weight: 700; }
+  .meta { margin-top: 8px; font-size: 13px; color: var(--ink-2); }
+  .meta span + span::before { content: " · "; }
+  .plain-intro {
+    margin-top: 12px; font-size: 13.5px; color: var(--ink-2);
+    background: var(--card); border: 1px solid var(--line); padding: 10px 14px;
+  }
+  h2 {
+    font-size: 17px; margin: 34px 0 12px; padding-left: 10px;
+    border-left: 4px solid var(--accent);
+  }
+  table {
+    width: 100%; border-collapse: collapse; background: var(--card);
+    font-size: 14px; border: 1px solid var(--line);
+  }
+  th, td {
+    border: 1px solid var(--line); padding: 9px 12px; text-align: left;
+    font-variant-numeric: tabular-nums;
+  }
+  th {
+    background: var(--thead); font-weight: 600; font-size: 13px;
+    color: var(--ink);
+  }
+  th .plain { display: block; font-weight: 400; font-size: 11.5px; color: var(--ink-2); white-space: normal; }
+  td.num, th.num { text-align: right; font-family: "Source Code Pro", Consolas, monospace; font-size: 13px; }
+  .note { font-size: 12.5px; color: var(--ink-2); margin-top: 8px; }
+  .verdict {
+    border: 1px solid var(--line); background: var(--card);
+    padding: 14px 18px; margin: 22px 0 4px;
+  }
+  .verdict-row { display: flex; gap: 16px; align-items: baseline; }
+  .verdict-label {
+    font-family: "Source Code Pro", Consolas, monospace; font-size: 11px;
+    letter-spacing: 2px; color: var(--ink-2); flex-shrink: 0;
+  }
+  .verdict-text { font-size: 16px; }
+  .verdict-fail strong { color: var(--fail); }
+  .verdict-pass strong { color: var(--pass); }
+  .verdict-fail { border-left: 4px solid var(--fail); }
+  .verdict-pass { border-left: 4px solid var(--pass); }
+  .verdict-plain {
+    margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--line);
+    font-size: 14px; color: var(--ink);
+  }
+  .verdict-plain::before { content: "翻译:"; color: var(--accent); font-weight: 600; margin-right: 6px; }
+  ul.tight { padding-left: 22px; font-size: 13.5px; color: var(--ink); }
+  ul.tight li { margin-bottom: 6px; }
+  footer {
+    margin-top: 44px; border-top: 1px solid var(--line); padding-top: 16px;
+  }
+  footer h2 { border-left: none; padding-left: 0; font-size: 14px; margin-top: 0; }
+  footer p, footer li { font-size: 12.5px; color: var(--ink-2); }
+  .stamp {
+    margin-top: 18px; font-family: "Source Code Pro", Consolas, monospace;
+    font-size: 11px; color: var(--ink-2); letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="kicker">参考类预测报告 · REFERENCE CLASS FORECAST</div>
+    <h1>{{项目名称}}</h1>
+    <div class="meta">
+      <span>预测对象:{{工期 / 预算 / 成功率}}</span>
+      <span>参考类:{{参考类名称(结构相似、已完结案例)}}</span>
+      <span>报告日期:{{YYYY-MM-DD}}</span>
+    </div>
+    <div class="plain-intro">这份报告在做什么:不看你的计划细节,先查"和你情况相似的人/项目最后都怎么样了"(参考类),用他们的真实结局做对照,再修正你的估计。</div>
+  </header>
+
+  <section>
+    <h2>范式三问<span style="font-size:12px;color:var(--ink-2);font-weight:400">(进基线之前先问的三个问题)</span></h2>
+    <table>
+      <thead>
+        <tr><th>问题</th><th>结论</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Q1 极限在哪里<span class="plain">用物理定律推导的天花板</span></td><td>{{极限值 + 推导依据,如"脂肪供能上限 69 kcal/kg 体脂/天(Alpert 2005)→ 3 个月约 14.5 kg"}}</td></tr>
+        <tr><td>Q2 现状距极限多远<span class="plain">量级判断</span></td><td>{{如"基线中位 3.5 kg 距极限 14.5 kg 约 4 倍——不是 10 倍,也不是 20%,说明还有跃迁空间"}}</td></tr>
+        <tr><td>Q3 历史数据是否同一范式<span class="plain">数据来自同一个时代吗</span></td><td>{{如"否——基线来自 2002~2013 行为干预范式;2021 年起进入药物范式,须并列新范式数据,结论可能翻转"}}</td></tr>
+      </tbody>
+    </table>
+    <p class="note">这张表的意思:先看清天花板多高、离天花板多远、老数据还算不算数——再谈基线怎么用。</p>
+  </section>
+
+  <!-- 结论条:verdict-fail(不支持)/ verdict-pass(支持)二选一;翻译行必填 -->
+  <section class="verdict verdict-fail">
+    <div class="verdict-row">
+      <div class="verdict-label">结论</div>
+      <div class="verdict-text">内部估计被基线<strong>【不支持】</strong>:{{一句话理由,专业表述}}</div>
+    </div>
+    <div class="verdict-plain">{{大白话把裁决说一遍,如"你的目标比同类人里做得最好的一拨还要快一倍,所以大概率达不到;放到 6 个月就是正常目标"}}</div>
+  </section>
+
+  <section>
+    <h2>一、内部估计 vs 基线分布 vs 调整后预测</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>指标(单位)</th>
+          <th class="num">内部估计<span class="plain">你自己估的</span></th>
+          <th class="num">基线中位<span class="plain">同类人里排中间那位</span></th>
+          <th class="num">基线上尾<span class="plain">同类里最好的前 10~20%</span></th>
+          <th class="num">失败率(%)<span class="plain">根本没做成的比例</span></th>
+          <th class="num">调整后预测<span class="plain">你的现实目标</span></th>
+          <th class="num">奇迹线<span class="plain">第一性原理最优解</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>工期(月)</td>
+          <td class="num">{{4.0}}</td>
+          <td class="num">{{6.6}}</td>
+          <td class="num">{{≥11.6}}</td>
+          <td class="num">{{19~40}}</td>
+          <td class="num">{{7.5}}</td>
+          <td class="num">{{14.5}}</td>
+        </tr>
+        <!-- 按需增删行;单位写入表头 -->
+      </tbody>
+    </table>
+    <p class="note">这张表的意思:别只看第一列你的目标,看最后一列——那是和你条件相似的人真实能做到的范围。{{口径说明:基线数据来源、样本、年份;内部估计记录于引入基线之前(Step 0)。}}</p>
+  </section>
+
+  <section>
+    <h2>二、乐观偏差诊断<span style="font-size:12px;color:var(--ink-2);font-weight:400">(你的估计比同类人的现实乐观多少)</span></h2>
+    <table>
+      <thead>
+        <tr><th>诊断项</th><th>结果</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>内部估计 / 基线中位</td><td class="num">{{0.61}}×</td></tr>
+        <tr><td>内部估计在基线分布中的位置</td><td>{{约 P15——100 个同类项目里只有约 15 个能达到你的估计}}</td></tr>
+        <tr><td>偏差性质</td><td>{{典型规划谬误(人做计划时系统性偏乐观):估计只算了顺利情形,没算"还没想到的意外"}}</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h2>三、把握度与现实目标对照(uplift)<span style="font-size:12px;color:var(--ink-2);font-weight:400">(想有多大把握,就按哪档定目标)</span></h2>
+    <table>
+      <thead>
+        <tr>
+          <th>目标把握度<span class="plain">按这数定,有多大把握不超</span></th>
+          <th class="num">上浮系数</th>
+          <th class="num">应预留工期(月)</th>
+          <th class="num">应预留预算(万元)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>P50(一半把握)</td><td class="num">{{1.64}}×</td><td class="num">{{6.6}}</td><td class="num">{{10.2}}</td></tr>
+        <tr><td>P80(八成把握)</td><td class="num">{{2.1}}×</td><td class="num">{{8.4}}</td><td class="num">{{12.4}}</td></tr>
+        <tr><td>P95(保守红线)</td><td class="num">{{2.9}}×</td><td class="num">{{11.6}}</td><td class="num">{{16.0}}</td></tr>
+      </tbody>
+    </table>
+    <p class="note">这张表的意思:你的估计(第一档基数)只有不到一半的把握;想有八成把握,就按 P80 那行预留。方法参照英国财政部《绿皮书》乐观偏差指南(HM Treasury, A 级)。</p>
+  </section>
+
+  <section>
+    <h2>四、微调因素<span style="font-size:12px;color:var(--ink-2);font-weight:400">(你和"平均同类"的客观差异,加分/减分)</span></h2>
+    <table>
+      <thead>
+        <tr><th>因素</th><th>方向</th><th>客观依据</th><th class="num">幅度</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>{{团队有 1 次同类交付记录}}</td><td>{{有利}}</td><td>{{2024 年按期交付过同量级项目}}</td><td class="num">{{-0.5 个月}}</td></tr>
+        <tr><td>{{首次接入第三方支付}}</td><td>{{不利}}</td><td>{{外部依赖 +1,接入方排期不可控}}</td><td class="num">{{+1.0 个月}}</td></tr>
+        <!-- 无客观证据的因素不入表;"我更努力/我更自律"这类主观信念一律不收 -->
+      </tbody>
+    </table>
+    <p class="note">这张表的意思:只有能摆出证据的差异才允许调整基线;单因素不超过相邻一个分位档(排名档位),没有证据就按同类人中间水平算。</p>
+  </section>
+
+  <section>
+  <section>
+    <h2>奇迹线可行性分析<span style="font-size:12px;color:var(--ink-2);font-weight:400">(达成奇迹线需要赌对什么)</span></h2>
+    <table>
+      <thead>
+        <tr><th>#</th><th>需成立的假设</th><th>怎么验证</th><th class="num">难度</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>{{假设描述}}</td><td>{{可查证的验证方式}}</td><td class="num">{{高/中/低}}</td></tr>
+      </tbody>
+    </table>
+    <p class="note">最难假设:第 {{N}} 条——{{理由(为什么不靠努力就能解决)}}。</p>
+    <table>
+      <thead><tr><th>终止条件(kill criteria)</th><th>触发信号</th></tr></thead>
+      <tbody>
+        <tr><td>{{什么条件下停止加码}}</td><td>{{可观测信号}}</td></tr>
+      </tbody>
+    </table>
+    <p class="note">这张表的意思:奇迹线不是许愿,是一组必须逐条成立的假设。哪条先崩、崩到什么程度就停手,事先写清楚——避免"越不达标越加码"。</p>
+  </section>
+
+    <h2>六、数据来源与可信度(必填)</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>数值</th><th>来源机构</th><th>文献</th><th class="num">年份</th><th>可信度<span class="plain">来源硬不硬</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{IT 项目平均超支 +27%,1/6 为黑天鹅(+200%)}}</td>
+          <td>{{Flyvbjerg & Budzier / Oxford}}</td>
+          <td>{{Harvard Business Review 89(9)}}</td>
+          <td class="num">{{2011}}</td>
+          <td>{{B}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note">可信度分四级:A=官方统计/政府(最硬);B=同行评议学术(专家审过的论文);C=权威行业报告(商业机构,可能有立场);D=无可靠来源(不填数字)。每条数据都能追到原始发布机构。</p>
+  </section>
+
+  <footer>
+    <h2>方法与局限</h2>
+    <ul class="tight">
+      <li>方法:参考类预测(RCF)——先取同类已完结案例的真实结局分布做"基线"(对照表),再按你的客观差异做限幅微调。由 Kahneman &amp; Tversky 提出,Flyvbjerg 系统化;英国财政部 2003 年起强制用于公共项目。</li>
+      <li>参考类构成:{{本报告参考类的构成、样本量、口径与年份范围}}。</li>
+      <li>局限:基线说的是"同类人的典型结局",不是你的命运判决书;分布覆盖不了史无前例的创新。</li>
+      <!-- 个人决策场景保留下一行 -->
+      <li>伦理提示:基线是统计参考,不构成对个人选择的建议或判决。</li>
+    </ul>
+    <div class="stamp">GENERATED BY REFERENCE-CLASS-FORECASTING SKILL · 基线数据核实日期 {{YYYY-MM-DD}}</div>
+  </footer>
+
+</div>
+</body>
+</html>

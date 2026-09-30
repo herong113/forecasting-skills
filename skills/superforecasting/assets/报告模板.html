@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>预测报告 · {{编号}}</title>
+<style>
+  :root {
+    --ink:#1f1f1d; --ink-2:#5f5e5a; --ink-3:#888780;
+    --line:#d6d3cc; --line-2:#ebe8e2;
+    --bg:#faf9f6; --card:#ffffff; --band:#f1efe8; --plain:#f6f4ec;
+    --accent:#0c447c; --accent-2:#185fa5; --warn:#993c1d;
+    --mono:"SFMono-Regular","Cascadia Mono",Consolas,"Liberation Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;padding:40px 24px 72px;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;
+    font-size:14px;line-height:1.7}
+  .wrap{max-width:900px;margin:0 auto}
+  header{border-bottom:1px solid var(--line);padding-bottom:16px;margin-bottom:26px}
+  h1{font-size:21px;font-weight:500;margin:0 0 8px;letter-spacing:.2px}
+  .meta{font-size:12.5px;color:var(--ink-2)}
+  .meta span{margin-right:18px}
+  .meta b{font-weight:500;color:var(--ink);font-family:var(--mono)}
+  h2{font-size:15px;font-weight:500;margin:34px 0 12px;padding-left:10px;border-left:2px solid var(--accent)}
+  .layer{border-radius:10px;padding:14px 18px;margin-bottom:10px}
+  .plain{background:var(--plain);border:1px solid var(--line-2)}
+  .pro{background:var(--card);border:1px solid var(--line-2)}
+  .lab{display:inline-block;font-size:11.5px;letter-spacing:1px;color:var(--ink-3);
+    border:1px solid var(--line);border-radius:4px;padding:0 6px;margin-bottom:8px}
+  .plain .txt{font-size:15px;line-height:1.75}
+  .plain .txt b{font-weight:500;color:var(--accent)}
+  .pro .txt{font-size:13.5px;color:var(--ink-2)}
+  .pro .txt b{font-weight:500;color:var(--ink)}
+  .verdict{background:var(--band);border-left:3px solid var(--accent);
+    padding:14px 18px;border-radius:0 8px 8px 0;margin-bottom:10px}
+  .verdict .tag{font-size:12px;color:var(--ink-2);letter-spacing:.5px}
+  .verdict .text{font-size:15.5px;margin-top:5px}
+  .cards{display:flex;gap:14px;flex-wrap:wrap;margin:16px 0 4px}
+  .card{flex:1 1 180px;background:var(--card);border:1px solid var(--line-2);border-radius:10px;padding:14px 16px}
+  .card .k{font-size:12px;color:var(--ink-2)}
+  .card .v{font-family:var(--mono);font-size:25px;font-weight:500;color:var(--accent);margin-top:3px}
+  .card .s{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);margin-top:2px}
+  table{width:100%;border-collapse:collapse;margin-top:8px;font-size:13px}
+  caption{text-align:left;font-size:12px;color:var(--ink-2);padding-bottom:6px}
+  th,td{border-bottom:1px solid var(--line-2);padding:7px 9px;text-align:left;vertical-align:top}
+  th{font-weight:500;font-size:12.5px;color:var(--ink-2);background:var(--band);white-space:nowrap}
+  td.num,th.num{font-family:var(--mono);text-align:right;white-space:nowrap}
+  .up{color:var(--warn)} .down{color:var(--accent-2)} .flag{color:var(--warn)}
+  .note{font-size:12.5px;color:var(--ink-2);margin-top:8px}
+  footer{margin-top:44px;padding-top:16px;border-top:1px solid var(--line);font-size:12px;color:var(--ink-3)}
+  footer p{margin:5px 0}
+  .pro p{margin:6px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- 用法：复制本模板 → 逐段替换 {{占位符}} → 存为 <档案编号>.html，与档案 .md 同目录同名。
+     每个板块固定两层：先「大白话」，再「专业解读」。两层的写作规则见 references/05-输出与登记.md。 -->
+
+<header>
+  <h1>{{问题标题}}</h1>
+  <div class="meta">
+    <span>编号 <b>{{F-YYYYMMDD-NN}}</b></span>
+    <span>场景 <b>{{一 · 重大决策}}</b></span>
+    <span>登记日 <b>{{YYYY-MM-DD}}</b></span>
+    <span>主判定日 <b>{{YYYY-MM-DD}}</b></span>
+    <span>里程碑 <b>{{40 / 50 / 60 岁}}</b></span>
+  </div>
+</header>
+
+<section>
+  <h2>一、结论</h2>
+  <div class="verdict">
+    <div class="tag">裁决</div>
+    <div class="text">直觉估计（{{55%}}）被外部基线 <b>{{支持 / 不支持}}</b>——结构化估计为 <b>{{4%}}</b>，{{相差约 14 倍}}。</div>
+  </div>
+
+  <div class="layer plain">
+    <div class="lab">大白话</div>
+    <div class="txt">{{用日常语言说清楚：这件事的概率大约多少（换成"多少人里一个"这种说法）、比你以为的高还是低、为什么。禁止出现术语，禁止用"可能/大概率"。}}</div>
+  </div>
+
+  <div class="layer pro">
+    <div class="lab">专业解读</div>
+    <div class="txt">
+      <p>总概率锚定<b>上位参考类</b>（{{参考类名称}} = {{2.3%}}），经差异点{{倍数制 / 百分点制}}调整后为 <b>{{4%}}</b>，敏感区间 <b>{{2%–10%}}</b>。</p>
+      <p>{{说明为何采用/不采用逐叶相乘；说明直觉基线的封存与对照安排。}}</p>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card"><div class="k">总概率</div><div class="v">{{4%}}</div><div class="s">敏感区间 {{2% – 10%}}</div></div>
+    <div class="card"><div class="k">上位参考类基线</div><div class="v">{{2.3%}}</div><div class="s">{{参考类说明}}</div></div>
+    <div class="card"><div class="k">差异点累计调整</div><div class="v">{{×1.66}}</div><div class="s">{{倍数制 / 百分点制}}</div></div>
+    <div class="card"><div class="k">直觉估计</div><div class="v">{{55%}}</div><div class="s">偏差 {{+51 点}}</div></div>
+  </div>
+</section>
+
+<section>
+  <h2>二、直觉 vs 算出来的结果</h2>
+  <div class="layer plain">
+    <div class="lab">大白话</div>
+    <div class="txt">{{说人话解释偏差出在哪：是哪条依据被推翻、还是漏算了什么。指出现象，不评判人。}}</div>
+  </div>
+  <div class="layer pro">
+    <div class="lab">专业解读</div>
+    <table>
+      <caption>这张表的意思：先记下你的直觉，最后跟算出来的结果对一下，看偏差出在哪。</caption>
+      <thead><tr><th>对照项</th><th>直觉（登记前锁定）</th><th>结构化结果</th><th>差异</th><th>诊断</th></tr></thead>
+      <tbody>
+        <tr><td>总概率</td><td class="num">{{55%}}</td><td class="num">{{4%}}</td><td class="num up">{{+51 点}}</td><td>{{重度乐观偏差}}</td></tr>
+        <tr><td>自报区间</td><td class="num">{{5%–90%}}</td><td class="num">{{2%–10%}}</td><td>—</td><td>{{区间宽 ≠ 判断谦逊}}</td></tr>
+        <tr><td>依据构成</td><td>{{①… ②… ③…}}</td><td>{{①×N ②… ③…}}</td><td>—</td><td>{{WYSIATI / 依据倒戈}}</td></tr>
+      </tbody>
+    </table>
+    <p class="note"><b>本轮改进项</b>：{{一条可执行的改进项，不接受"下次更谨慎些"}}</p>
+  </div>
+</section>
+
+<section>
+  <h2>三、加减分项（差异点）</h2>
+  <div class="layer plain">
+    <div class="lab">大白话</div>
+    <div class="txt">{{把往上推的几条、往下压的几条用人话说一遍。特别点出用户自己没意识到的那些（尤其是"往下压"的有利因素）。}}</div>
+  </div>
+  <div class="layer pro">
+    <div class="lab">专业解读</div>
+    <table>
+      <caption>这张表的意思：跟人群平均水平比，你这件事好在哪、差在哪，每条都要有依据。</caption>
+      <thead><tr><th>#</th><th>差异点</th><th>方向</th><th>依据</th><th class="num">调整</th></tr></thead>
+      <tbody>
+        <tr><td class="num">1</td><td>{{差异点}}</td><td class="up">↑</td><td>{{客观依据}}</td><td class="num">{{×1.6}}</td></tr>
+        <tr><td class="num">2</td><td>{{差异点}}</td><td class="down">↓</td><td>{{客观依据}}</td><td class="num">{{×0.8}}</td></tr>
+        <tr><td class="num">—</td><td><b>累计</b></td><td>—</td><td>{{2.3% × 1.66 ≈ 3.8%}}</td><td class="num"><b>{{×1.66}}</b></td></tr>
+      </tbody>
+    </table>
+    <p class="note"><b>交叉校验（双路径互校）</b>：{{第二条独立路径的算法与结果}} → {{量级}}。<b>{{是否同量级}}</b></p>
+    <p class="note">限幅口径：{{基线 ≥10% 用百分点制（单因素 ≤±10、累计 ≤±20）／基线 <10% 用倍数制（单因素 ≤×2、累计 ≤×3、下限 ≥×0.5）}}</p>
+  </div>
+</section>
+
+<section>
+  <h2>四、数字都是从哪来的</h2>
+  <div class="layer plain">
+    <div class="lab">大白话</div>
+    <div class="txt">{{用人话说明这些数字是公开调查得来的、还是估的；明确指出哪些地方没有数据、我们空着没编。}}</div>
+  </div>
+  <div class="layer pro">
+    <div class="lab">专业解读</div>
+    <table>
+      <caption>这张表的意思：每个数字从哪来的、有多可信，都写清楚，方便以后复查。</caption>
+      <thead><tr><th>用途</th><th>参考类 / 指标</th><th>级别</th><th class="num">数值</th><th>来源</th><th>可信度</th></tr></thead>
+      <tbody>
+        <tr><td><b>上位参考类（锚）</b></td><td>{{参考类}}</td><td>—</td><td class="num">{{2.3%}}</td><td>{{来源机构}}</td><td>{{C}}</td></tr>
+        <tr><td>{{叶子}}</td><td>{{参考类}}</td><td>{{L1/L2/L3}}</td><td class="num">{{数值}}</td><td>{{来源}}</td><td>{{B}}</td></tr>
+        <tr><td class="flag" colspan="6">无外部基线（L4）：{{叶子}}——{{原因}}，<b>未参与调整</b>（未编造数字）</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>五、真要降风险，抓手是哪几个</h2>
+  <div class="layer plain">
+    <div class="lab">大白话</div>
+    <div class="txt">{{用人话说清楚：能改的是哪一两个、改了能降到多少；以及有没有"做一件事就能消掉一大块不确定"的低成本动作。}}</div>
+  </div>
+  <div class="layer pro">
+    <div class="lab">专业解读</div>
+    <table>
+      <caption>这张表的意思：哪件事最可能卡住、还能不能改——能改的现在就去改。</caption>
+      <thead><tr><th>类型</th><th>内容</th><th>可干预性</th><th>处置</th></tr></thead>
+      <tbody>
+        <tr><td>🎯 头号瓶颈</td><td>{{最可能卡住 × 还能改变}}</td><td>{{可干预}}</td><td>{{条件追问结论}}</td></tr>
+        <tr><td>🎯 信息瓶颈</td><td>{{不确定性最大的未知项}}</td><td>{{成本}}</td><td>{{如何低成本消除}}</td></tr>
+        <tr><td>风险项</td><td>{{卡住但不可干预}}</td><td>待观测</td><td>{{预警信号 → 动作}}</td></tr>
+      </tbody>
+    </table>
+    <p class="note"><b>风险项（卡住且不可干预）</b>：{{有则列出，无则明写"无"}}</p>
+    <p class="note"><b>目标线对照</b>：{{用户的干预目标 vs 当前估计}}</p>
+  </div>
+</section>
+
+<section>
+  <h2>六、方法与局限</h2>
+  <div class="layer plain">
+    <div class="lab">大白话</div>
+    <div class="txt">{{用两句话说清最重要的方法原则（先外部后内部；不做逐叶相乘），以及本次最大的不确定性在哪。}}</div>
+  </div>
+  <div class="layer pro">
+    <div class="lab">专业解读</div>
+    <div class="txt">
+      <p><b>方法</b>：{{流程名与方法要点}}</p>
+      <p><b>局限</b>：{{①… ②… ③… ④…}}</p>
+      <p><b>判定口径</b>：{{指标、阈值、时点、排除项}}</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>登记日 {{YYYY-MM-DD}} ｜ 首次复核 {{YYYY-MM-DD}} ｜ 里程碑 {{…}} ｜ 主判定日 {{YYYY-MM-DD}}</p>
+  <p>档案：<code>{{F-YYYYMMDD-NN-标题}}.md</code>（内容权威，只追加）｜ 本报告为可再生的呈现层</p>
+  <p><b>本报告只呈现概率、分布与风险路径，不构成任何{{医疗 / 投资 / 法律}}建议。</b></p>
+</footer>
+
+</div>
+</body>
+</html>

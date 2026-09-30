@@ -1,0 +1,47 @@
+{
+  "_说明": "超预测机读总账模板。复制为 ~/.workbuddy/forecast-archive/_ledger.json 后使用。权威归属：.md 档案是内容权威，本文件是数值索引；两者冲突时以 .md 为准并回填本文件。",
+  "_字段一致性铁律": "final_probability 必须等于 probability_history 最后一条的 p，也必须等于 updates 最后一条的 to。三者不一致时 brier.py 会取到错误的正式分。",
+  "version": 1,
+  "forecasts": [
+    {
+      "id": "F-YYYYMMDD-NN",
+      "title": "短标题",
+      "scenario": 1,
+      "question_type": "event",
+      "exit": "B",
+      "registered_at": "YYYY-MM-DDTHH:MM:SS+08:00",
+      "deadline": "YYYY-MM-DD",
+      "next_review": "YYYY-MM-DD",
+      "status": "open",
+      "initial_intuition": 0.7,
+      "baseline_probability": 0.55,
+      "final_probability": 0.55,
+      "probability_history": [
+        {
+          "at": "YYYY-MM-DDTHH:MM:SS+08:00",
+          "p": 0.61
+        },
+        {
+          "at": "YYYY-MM-DDTHH:MM:SS+08:00",
+          "p": 0.55
+        }
+      ],
+      "updates": [
+        {
+          "at": "YYYY-MM-DDTHH:MM:SS+08:00",
+          "from": 0.61,
+          "to": 0.55,
+          "trigger": "哪片叶子 / 哪条证据（触因必填，追溯不上不许落记录）"
+        }
+      ],
+      "resolved": null,
+      "resolved_at": null,
+      "judgment_disputed": false,
+      "brier": null,
+      "brier_initial": null,
+      "bss": null,
+      "attributed_step": null,
+      "path": "01-重大决策/F-YYYYMMDD-NN-短标题.md"
+    }
+  ]
+}
